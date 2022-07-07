@@ -1,5 +1,5 @@
-## Welcome to GitHub Pages
+## JS-Sample
 
-You can use the [editor on GitHub](https://github.com/mlcoor/js-sample/edit/main/README.md) to maintain and preview the content for your website in Markdown files.
+一些简单实用的 JavaScript 实例。
 
 [指针时钟](https://mlcoor.github.io/js-sample/clock/handClock.html)
