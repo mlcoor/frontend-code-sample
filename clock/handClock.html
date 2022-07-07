@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>指针时钟/Hand clock</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      .container {
+        --background-color: #e3e4e5;
+        --clock-border-color: #000000;
+        --center-dot-color: #fff;
+        --hour-hand-color: #ff1010;
+        --min-hand-color: #000;
+        --sec-hand-color: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: var(--background-color);
+        min-height: 100vh;
+      }
+      .clock {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        width: 350px;
+        height: 350px;
+        border: 20px solid var(--clock-border-color);
+        border-radius: 50%;
+        box-shadow: 0 -15px 15px rgba(255, 255, 255, 0.5),
+          inset 0 -15px 15px rgba(255, 255, 255, 0.5),
+          0 -15px 15px rgba(0, 0, 0, 0.3), inset 0 -15px 15px rgba(0, 0, 0, 0.3);
+      }
+      .clock::before {
+        content: "";
+        position: absolute;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background: var(--center-dot-color);
+        z-index: 1000;
+      }
+      .clock .hour,
+      .clock .min,
+      .clock .sec {
+        position: absolute;
+      }
+      .clock .hour {
+        height: 160px;
+        width: 160px;
+      }
+      .clock .min {
+        height: 190px;
+        width: 190px;
+      }
+      .clock .sec {
+        height: 230px;
+        width: 230px;
+      }
+      .hour,
+      .min,
+      .sec {
+        display: flex;
+        justify-content: center;
+        position: absolute;
+        border-radius: 50%;
+        transition: all 0.05s;
+        transition-timing-function: cubic-bezier(0.31, 2.34, 0.27, 1.05);
+      }
+      .hour::before {
+        content: "";
+        position: absolute;
+        width: 8px;
+        height: 80px;
+        background: var(--hour-hand-color);
+        border-radius: 6px 6px 0 0;
+        z-index: 11;
+      }
+      .min::before {
+        content: "";
+        position: absolute;
+        width: 4px;
+        height: 90px;
+        background: var(--min-hand-color);
+        border-radius: 6px 6px 0 0;
+        z-index: 12;
+      }
+      .sec::before {
+        content: "";
+        position: absolute;
+        width: 2px;
+        height: 150px;
+        background: var(--sec-hand-color);
+        border-radius: 6px 6px 0 0;
+        z-index: 12;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="clock">
+        <div class="hour"></div>
+        <div class="min"></div>
+        <div class="sec"></div>
+      </div>
+    </div>
+
+    <script>
+      // 单位刻度；360/60 360/12
+      const deg = 6;
+      const hour = document.querySelector(".hour");
+      const min = document.querySelector(".min");
+      const sec = document.querySelector(".sec");
+
+      function setDate() {
+        let now = new Date();
+        let secHand = now.getSeconds() * deg;
+        let minHand = now.getMinutes() * deg + secHand / 60;
+        let hourHand = ((now.getHours() % 12) * 360) / 12 + minHand / 60;
+
+        //		解决指针跳顿问题【第一种方法】
+        //		在发生跳顿的角度值处，将 CSS 的 `transition` 属性去掉
+        if (minHand === 0) min.style.transition = "all 0s";
+        else min.style.transition = "all cubic-bezier(0.31, 2.34, 0.27, 1.05)";
+        if (secHand === 0) sec.style.transition = "all 0s";
+        else sec.style.transition = "all cubic-bezier(0.31, 2.34, 0.27, 1.05)";
+
+        sec.style.transform = `rotateZ(${secHand}deg)`;
+        min.style.transform = `rotateZ(${minHand}deg)`;
+        hour.style.transform = `rotateZ(${hourHand}deg)`;
+      }
+      setInterval(setDate, 100);
+      // 初始化时不会跳针；
+      setDate();
+    </script>
+  </body>
+</html>
