@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flex photo Panel</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      .panels {
+        display: flex;
+        width: 90%;
+        height: 700px;
+        gap: 20px;
+      }
+      .panel {
+        flex: 1;
+        overflow: hidden;
+        transition: 0.5s;
+        border-radius: 20px;
+        box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
+        border: 10px solid #e2e3e4;
+        background-color: #e2e3e4;
+      }
+      .panel > img {
+        width: 200%;
+        height: 100%;
+        object-fit: cover;
+        transition: all 0.5s;
+      }
+      .panel .text {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 700px;
+        width: 90%;
+        transform: translateY(-100%);
+        transition: transform 0.5s;
+      }
+      .panel .text p {
+        text-transform: uppercase;
+        font-family: "Amatic SC", cursive;
+        text-shadow: 0 0 4px rgba(0, 0, 0, 0.72), 0 0 14px rgba(0, 0, 0, 0.45);
+        font-size: 2em;
+        line-height: 6em;
+        color: #e2e3e4;
+      }
+      .panel .text p:first-child {
+        transform: translateY(-100%);
+      }
+      .panel > .text p:last-child {
+        transform: translateY(100%);
+      }
+      .panel:hover {
+        flex: 5;
+      }
+      .panel:hover > img {
+        width: 100%;
+        height: 100%;
+      }
+      .panel:hover .text p {
+        font-size: 3em;
+      }
+      .panel:hover .text p {
+        transform: translateY(0%);
+      }
+      @media only screen and (max-width: 600px) {
+        .panel p {
+          font-size: 1em;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="panels">
+      <div class="panel">
+        <img src="https://source.unsplash.com/gYl-UtwNg_I/1500x1500" alt="" />
+        <div class="text">
+          <p>Hey</p>
+          <p>Let's</p>
+          <p>Dance</p>
+        </div>
+      </div>
+      <div class="panel">
+        <img src="https://source.unsplash.com/rFKUFzjPYiQ/1500x1500" alt="" />
+        <div class="text">
+          <p>Give</p>
+          <p>Take</p>
+          <p>Receive</p>
+        </div>
+      </div>
+      <div class="panel">
+        <img
+          src="https://images.unsplash.com/photo-1465188162913-8fb5709d6d57?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&w=1500&h=1500&fit=crop&s=967e8a713a4e395260793fc8c802901d"
+          alt=""
+        />
+        <div class="text">
+          <p>Experience</p>
+          <p>It</p>
+          <p>Today</p>
+        </div>
+      </div>
+      <div class="panel">
+        <img src="https://source.unsplash.com/ITjiVXcwVng/1500x1500" alt="" />
+        <div class="text">
+          <p>Give</p>
+          <p>All</p>
+          <p>You can</p>
+        </div>
+      </div>
+      <div class="panel">
+        <img src="https://source.unsplash.com/3MNzGlQM7qs/1500x1500" alt="" />
+        <div class="text">
+          <p>Life</p>
+          <p>In</p>
+          <p>Motion</p>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script></script>
+</html>
